@@ -1,22 +1,22 @@
-# tRPC SvelteKit MCP Server
+# shadcn-svelte MCP Server
 
-A specialized Model Context Protocol (MCP) server for tRPC SvelteKit development, providing curated knowledge, code examples, and intelligent assistance for building type-safe APIs with end-to-end type safety in SvelteKit applications.
+A specialized Model Context Protocol (MCP) server for shadcn-svelte development, providing curated knowledge, code examples, and intelligent assistance for building modern UI components with design systems, theming, and accessibility best practices in Svelte and SvelteKit applications.
 
 ## Features
 
 ### 🔍 **Searchable Resources**
-- **Knowledge Base**: Curated Q&A covering tRPC SvelteKit concepts, patterns, and best practices
-- **Code Examples**: Searchable collection of tRPC SvelteKit implementation patterns
+- **Knowledge Base**: Curated Q&A covering shadcn-svelte concepts, patterns, and best practices
+- **Code Examples**: Searchable collection of shadcn-svelte implementation patterns
 
 ### 🛠️ **Intelligent Tools**
 - `search_knowledge` - Find explanations and concepts
 - `search_examples` - Discover code patterns and implementations
 - `generate_with_context` - Create routers and procedures using curated patterns
-- `audit_with_rules` - Review code against tRPC SvelteKit best practices
+- `audit_with_rules` - Review code against shadcn-svelte best practices
 - `explain_concept` - Get detailed explanations with examples
 
 ### 📝 **Smart Prompts**
-- `generate-router` - Generate modern tRPC SvelteKit routers
+- `generate-router` - Generate modern shadcn-svelte routers
 - `audit-trpc-code` - Audit code for optimization opportunities
 - `explain-concept` - Detailed concept explanations
 - `search-patterns` - Find specific implementation patterns
@@ -30,9 +30,9 @@ Simply add to your Claude Desktop configuration - no installation required:
 ```json
 {
   "mcpServers": {
-    "trpc-sveltekit": {
+    "shadcn-svelte": {
       "command": "bunx",
-      "args": ["@binsarjr/trpc-sveltekit-mcp"],
+      "args": ["@binsarjr/shadcn-svelte-mcp"],
       "env": {}
     }
   }
@@ -43,8 +43,8 @@ Simply add to your Claude Desktop configuration - no installation required:
 
 ```bash
 # Clone and setup
-git clone https://github.com/binsarjr/trpc-sveltekit-mcp
-cd trpc-sveltekit-mcp
+git clone https://github.com/binsarjr/shadcn-svelte-mcp
+cd shadcn-svelte-mcp
 
 # Install dependencies with Bun
 bun install
@@ -56,15 +56,15 @@ bun start
 ## Project Structure
 
 ```
-trpc-sveltekit-mcp/
+shadcn-svelte-mcp/
 ├── src/
 │   ├── index.ts                    # Main MCP server implementation
-│   ├── TRPCSvelteKitSearchDB.ts   # SQLite database with FTS5 search
+│   ├── ShadcnSvelteSearchDB.ts   # SQLite database with FTS5 search
 │   └── data/
 │       ├── knowledge/             # Curated Q&A knowledge base (JSONL)
-│       └── patterns/              # Code examples and patterns (JSONL)
+│       ├── examples/              # Code examples and patterns (JSONL)
+│       └── components/            # Component catalog with props and variants (JSONL)
 ├── package.json
-├── bun.lockb                      # Bun lock file
 ├── tsconfig.json
 └── README.md
 ```
@@ -76,9 +76,9 @@ trpc-sveltekit-mcp/
 ```json
 {
   "mcpServers": {
-    "trpc-sveltekit": {
+    "shadcn-svelte": {
       "command": "bunx",
-      "args": ["@binsarjr/trpc-sveltekit-mcp"],
+      "args": ["@binsarjr/shadcn-svelte-mcp"],
       "env": {}
     }
   }
@@ -92,7 +92,7 @@ trpc-sveltekit-mcp/
   "mcpServers": {
     "trpc-sveltekit": {
       "command": "bun",
-      "args": ["/path/to/trpc-sveltekit-mcp/src/index.ts"],
+      "args": ["/path/to/shadcn-svelte-mcp/src/index.ts"],
       "env": {}
     }
   }
@@ -104,76 +104,106 @@ trpc-sveltekit-mcp/
 ### 🔍 Search Knowledge
 ```
 Tool: search_knowledge
-Query: "authentication middleware"
+Query: "button variants themes"
 ```
 
-Returns detailed explanations about implementing authentication in tRPC SvelteKit.
+Returns detailed explanations about implementing button variants with different themes in shadcn-svelte.
 
 ### 📚 Find Code Examples
 ```
 Tool: search_examples
-Query: "router setup context"
+Query: "card component accessibility"
 ```
 
-Returns working tRPC SvelteKit router implementations with context setup.
+Returns working shadcn-svelte card component implementations with accessibility features.
 
-### 🏗️ Generate Routers
+### 🧩 Search Components
 ```
-Tool: generate_with_context
-Description: "User management API with CRUD operations"
-Procedures: ["list", "create", "update", "delete"]
+Tool: search_components
+Query: "dialog modal"
 ```
 
-Generates a complete tRPC router using modern patterns with relevant examples from the knowledge base.
+Returns component details for dialog/modal components with props, variants, and installation instructions.
+
+### 🏗️ Generate Components
+```
+Tool: generate_component
+Description: "User profile card with avatar, name, and action buttons"
+Component Type: "card"
+Theme: "auto"
+```
+
+Generates a complete shadcn-svelte component using modern patterns with relevant examples from the knowledge base.
 
 ### 🔍 Audit Code
 ```
 Tool: audit_with_rules
-Code: "const router = t.router({ hello: t.procedure.query(() => 'world') });"
-Focus: "best-practices"
+Code: "const Button = ({ variant = 'default', ...props }) => { ... }"
+Focus: "accessibility"
 ```
 
-Analyzes code and suggests tRPC SvelteKit improvements like input validation and error handling.
+Analyzes code and suggests shadcn-svelte improvements for accessibility compliance and design system consistency.
 
-## Key tRPC SvelteKit Concepts Covered
+## Key shadcn-svelte Concepts Covered
 
-### 🎯 **Core tRPC Features**
-- **Routers** - API organization and structure
-- **Procedures** - Query, mutation, and subscription endpoints
-- **Context** - Request-level data and services
-- **Middleware** - Reusable logic for authentication, logging, etc.
-- **Type Safety** - End-to-end TypeScript integration
+### 🎯 **Core shadcn-svelte Features**
+- **Components** - Pre-built, accessible UI components
+- **Themes** - Light/dark mode support with CSS variables
+- **Variants** - Component styling variations using class-variance-authority
+- **Design System** - Consistent color, spacing, and typography tokens
+- **Accessibility** - WCAG-compliant components with proper ARIA attributes
 
-### 🧩 **SvelteKit Integration**
-- **Load Functions** - Server-side data fetching with tRPC
-- **Client Usage** - Calling tRPC procedures from Svelte components
-- **Error Handling** - TRPCError and client-side error management
-- **Hooks Integration** - Setting up tRPC in SvelteKit hooks
-- **Real-time Features** - WebSocket subscriptions
+### 🧩 **Svelte Integration**
+- **Component Composition** - Using slots and component patterns
+- **Reactive Patterns** - Svelte's reactivity with shadcn-svelte components
+- **TypeScript Integration** - Proper type definitions and prop typing
+- **SvelteKit Usage** - Server-side rendering and routing integration
+- **Style Management** - Tailwind CSS integration and customization
 
 ### 📈 **Advanced Patterns**
-- **Authentication & Authorization** - JWT, sessions, and role-based access
-- **Input Validation** - Zod schemas and type-safe inputs
-- **File Uploads** - Handling files with SvelteKit and tRPC
-- **Caching** - Request caching and optimization strategies
-- **Testing** - Unit and integration testing patterns
+- **Custom Theming** - Creating custom theme configurations
+- **Component Variants** - Advanced styling patterns with cva
+- **Responsive Design** - Mobile-first component implementations
+- **Form Handling** - Form components with validation and accessibility
+- **Animation** - Motion and transition patterns with shadcn-svelte
 
 ## Data Format
 
 ### Knowledge Base (JSONL files in `data/knowledge/`)
 ```json
 {
-  "question": "How do you create a tRPC router in SvelteKit?",
-  "answer": "Create a tRPC router using t.router() and define procedures with t.procedure.query() for read operations..."
+  "question": "How do I customize shadcn-svelte button variants?",
+  "answer": "To customize button variants in shadcn-svelte, you can modify the variants object in your button component using class-variance-authority (cva)...",
+  "category": "components",
+  "tags": ["button", "variants", "customization"]
 }
 ```
 
-### Examples (JSONL files in `data/patterns/`)
+### Examples (JSONL files in `data/examples/`)
 ```json
 {
-  "instruction": "Create a basic tRPC router with TypeScript",
-  "input": "Set up a basic tRPC router with a simple greeting query",
-  "output": "// lib/trpc/router.ts\nimport { initTRPC } from '@trpc/server';\n..."
+  "title": "Accessible Button with Custom Variants",
+  "description": "Button component with custom variants and full accessibility support",
+  "component": "Button",
+  "code": "<script lang=\"ts\">\n  import { cn } from '$lib/utils';\n  import { buttonVariants } from './variants';\n  \n  type Variant = 'default' | 'destructive' | 'outline';\n  \n  interface Props {\n    variant?: Variant;\n    class?: string;\n  }\n  \n  let { variant = 'default', class: className, ...restProps }: Props = $props();\n</script>\n\n<button \n  class={cn(buttonVariants({ variant }), className)}\n  {...restProps}\n>\n  <slot />\n</button>",
+  "category": "buttons",
+  "tags": ["button", "variants", "accessibility", "typescript"],
+  "complexity": "intermediate",
+  "dependencies": ["class-variance-authority", "clsx"]
+}
+```
+
+### Component Entries (JSONL files in `data/components/`)
+```json
+{
+  "name": "Button",
+  "description": "Displays a button or a component that looks like a button with various styling variants",
+  "category": "form",
+  "props": "{\"variant\": {\"type\": \"'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'\", \"default\": \"'default'\"}, \"size\": {\"type\": \"'default' | 'sm' | 'lg' | 'icon'\", \"default\": \"'default'\"}}",
+  "usage": "<Button variant=\"outline\" size=\"sm\">Click me</Button>",
+  "installation": "npx shadcn-svelte@latest add button",
+  "variants": ["default", "destructive", "outline", "secondary", "ghost", "link"],
+  "dependencies": ["class-variance-authority", "clsx"]
 }
 ```
 
@@ -183,7 +213,7 @@ Analyzes code and suggests tRPC SvelteKit improvements like input validation and
 
 The server stores its SQLite database following the XDG Base Directory specification:
 
-- **All platforms**: `~/.config/binsarjr/trpc-sveltekit-mcp/database.db`
+- **All platforms**: `~/.config/binsarjr/shadcn-svelte-mcp/database.db`
 
 This provides a consistent, organized location across all operating systems.
 
@@ -194,12 +224,12 @@ You can customize the database location using environment variables:
 ```json
 {
   "mcpServers": {
-    "trpc-sveltekit": {
+    "shadcn-svelte": {
       "command": "bunx",
-      "args": ["@binsarjr/trpc-sveltekit-mcp"],
+      "args": ["@binsarjr/shadcn-svelte-mcp"],
       "env": {
-        "TRPC_SVELTEKIT_MCP_CONFIG_DIR": "/custom/config/path",
-        "TRPC_SVELTEKIT_MCP_DB_PATH": "/custom/database.db"
+        "SHADCN_SVELTE_MCP_CONFIG_DIR": "/custom/config/path",
+        "SHADCN_SVELTE_MCP_DB_PATH": "/custom/database.db"
       }
     }
   }
@@ -210,9 +240,9 @@ You can customize the database location using environment variables:
 
 The server uses SQLite with FTS5 for advanced search capabilities:
 
-- **Full-Text Search**: Utilizes SQLite's FTS5 extension for powerful and efficient searching across the knowledge base and code examples.
+- **Full-Text Search**: Utilizes SQLite's FTS5 extension for powerful and efficient searching across the knowledge base, examples, and components.
 - **Tokenization**: Employs the `unicode61` tokenizer with a comprehensive set of separators for robust indexing of terms.
-- **Synonym Expansion**: Enhances search recall by automatically expanding query terms with predefined tRPC SvelteKit-specific synonyms (e.g., 'router' also matches 'api router').
+- **Synonym Expansion**: Enhances search recall by automatically expanding query terms with predefined shadcn-svelte-specific synonyms.
 - **Result Highlighting**: Search results include highlighted matches within relevant fields using FTS5's `highlight()` function.
 - **Relevance Ranking**: Results are ordered by relevance based on FTS5's internal ranking algorithm.
 - **Advanced Boosting**: Offers capabilities for custom scoring and boosting to fine-tune search results.
@@ -225,24 +255,48 @@ The server provides comprehensive logging and error handling:
 ```bash
 # Test the server
 echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | bun start
+
+# Test via bunx
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | bunx @binsarjr/shadcn-svelte-mcp
+
+# Enable development mode with watch
+bun run dev
+
+# Inspect the server (for debugging)
+bun run inspect
+```
+
+### Building and Publishing
+
+```bash
+# Build for production
+bun run build
+
+# Publish to npm
+npm publish
 ```
 
 ## Contributing
 
 ### Adding Knowledge
 1. Add entries to JSONL files in `src/data/knowledge/`
-2. Format: `{"question": "...", "answer": "..."}`
-3. Focus on tRPC SvelteKit specific features and best practices
+2. Format: `{"question": "...", "answer": "...", "category": "...", "tags": [...]}`
+3. Focus on shadcn-svelte specific features and best practices
 
 ### Adding Examples
-1. Add entries to JSONL files in `src/data/patterns/`
-2. Format: `{"instruction": "...", "input": "...", "output": "..."}`
-3. Include complete, working tRPC SvelteKit code examples
+1. Add entries to JSONL files in `src/data/examples/`
+2. Format: `{"title": "...", "description": "...", "component": "...", "code": "...", "category": "...", "tags": [...], "complexity": "...", "dependencies": [...]}`
+3. Include complete, working shadcn-svelte code examples
+
+### Adding Components
+1. Add entries to JSONL files in `src/data/components/`
+2. Format: `{"name": "...", "description": "...", "category": "...", "props": "...", "usage": "...", "installation": "...", "variants": [...], "dependencies": [...]}`
+3. Document component API, variants, and usage patterns
 
 ### Search Optimization
-- Use descriptive, searchable keywords in questions and instructions
+- Use descriptive, searchable keywords in questions, titles, and descriptions
 - Include alternative phrasings for common concepts
-- Tag examples with relevant feature names (`router`, `procedures`, `context`, etc.)
+- Tag examples with relevant feature names (`button`, `theme`, `variant`, etc.)
 
 ## Advanced Usage
 
@@ -250,35 +304,35 @@ echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | bun start
 The search tools support sophisticated queries:
 
 ```typescript
-// Search for authentication patterns
-search_examples("authentication middleware jwt")
+// Search for component patterns
+search_examples("button variants accessibility")
 
-// Find type safety guidance
-search_knowledge("typescript type inference zod")
+// Find theming guidance
+search_knowledge("dark mode theme customization")
 
-// Discover integration patterns
-search_examples("sveltekit load function trpc")
+// Discover specific components
+search_components("dialog modal overlay")
 ```
 
 ### Prompt Chaining
 Use prompts in sequence for complex workflows:
 
-1. `search-patterns` - Find relevant patterns
-2. `generate-router` - Create based on patterns
-3. `audit-trpc-code` - Review and optimize
+1. `find-component` - Find relevant components
+2. `generate-component` - Create based on patterns
+3. `audit-shadcn-code` - Review and optimize
 
 ### Integration Tips
 - **Claude Desktop**: Best for interactive development
 - **API Integration**: Use programmatically for code generation
 - **CI/CD**: Audit code in automated workflows
-- **Documentation**: Generate examples for API documentation
+- **Documentation**: Generate examples for design system documentation
 
 ## Troubleshooting
 
 ### Common Issues
 
 **"No results found"**
-- Check search terms are relevant to tRPC SvelteKit
+- Check search terms are relevant to shadcn-svelte
 - Try broader queries first, then narrow down
 - Ensure data files are properly formatted JSONL
 
@@ -293,7 +347,7 @@ Use prompts in sequence for complex workflows:
 **Database/Config Issues**
 - Check if config directory is writable
 - Verify database permissions in the config folder
-- Use `TRPC_SVELTEKIT_MCP_DB_PATH` environment variable for custom locations
+- Use `SHADCN_SVELTE_MCP_DB_PATH` environment variable for custom locations
 - Check logs for database initialization messages
 
 ### Debugging
@@ -302,10 +356,10 @@ Use prompts in sequence for complex workflows:
 DEBUG=* bun start
 
 # Test database location
-bunx @binsarjr/trpc-sveltekit-mcp  # Watch for config path logs
+bunx @binsarjr/shadcn-svelte-mcp  # Watch for config path logs
 
 # Check config directory (all platforms)
-ls -la ~/.config/binsarjr/trpc-sveltekit-mcp/
+ls -la ~/.config/binsarjr/shadcn-svelte-mcp/
 ```
 
 ## License
@@ -316,5 +370,5 @@ MIT License - see LICENSE file for details.
 
 - Built with [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 - Validation with [Zod](https://zod.dev/)
-- Curated tRPC SvelteKit knowledge from official documentation and community best practices
-- Powered by [tRPC](https://trpc.io/) and [SvelteKit](https://kit.svelte.dev/)
+- Curated shadcn-svelte knowledge from official documentation and community best practices
+- Powered by [shadcn-svelte](https://www.shadcn-svelte.com/), [Svelte](https://svelte.dev/), and [SvelteKit](https://kit.svelte.dev/)

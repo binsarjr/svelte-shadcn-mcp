@@ -23,9 +23,12 @@ bun install
 bunx @modelcontextprotocol/inspector bun src/index.ts
 ```
 
-### Publishing
+### Building and Publishing
 ```bash
-# Publish to npm (no build step required - Bun runs TypeScript directly)
+# Build for production (required before publishing)
+bun run build
+
+# Publish to npm
 npm publish
 
 # Test the published package locally
@@ -47,6 +50,8 @@ echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | bunx @binsarjr/shad
 
 - **`src/index.ts`**: Main MCP server implementation with tool and prompt handlers
 - **`src/ShadcnSvelteSearchDB.ts`**: SQLite-based search database with FTS5 full-text search capabilities
+- **`src/utils/config.ts`**: Configuration management with XDG directory support
+- **`src/utils/jsonl.ts`**: JSONL file handling utilities for loading data
 - **`src/data/knowledge/`**: Curated Q&A knowledge base for shadcn-svelte concepts
 - **`src/data/examples/`**: Code examples and component implementation patterns
 - **`src/data/components/`**: Complete component catalog with props and variants
@@ -139,6 +144,10 @@ This server is specifically designed for shadcn-svelte development patterns:
 src/
 ├── index.ts                    # Main MCP server (tool handlers, prompt handlers)
 ├── ShadcnSvelteSearchDB.ts    # Database layer with search functionality
+├── utils/                     # Utility functions
+│   ├── config.ts              # Configuration management
+│   ├── jsonl.ts               # JSONL file loading utilities
+│   └── convert-to-jsonl.ts    # Data conversion utilities
 └── data/
     ├── knowledge/             # Q&A knowledge base (JSONL files)
     ├── examples/              # Code examples and patterns (JSONL files)
@@ -191,4 +200,39 @@ src/
   "variants": "[\"default\", \"destructive\", \"outline\"]",
   "dependencies": "[\"class-variance-authority\"]"
 }
+```
+
+## Force Resync Data
+
+The server supports force resyncing the database with fresh data from JSONL files:
+
+```bash
+# Force resync database with updated data
+bun start --force
+
+# Or when running in dev mode
+bun run dev --force
+```
+
+## Environment Variables
+
+The following environment variables can be used to customize configuration:
+
+- `SHADCN_SVELTE_MCP_CONFIG_DIR`: Custom config directory path
+- `SHADCN_SVELTE_MCP_DB_PATH`: Custom database file path
+- `XDG_CONFIG_HOME`: XDG config home directory (defaults to ~/.config)
+
+## Important Implementation Notes
+
+- The server uses Bun's native SQLite implementation (`bun:sqlite`) instead of external SQLite libraries
+- All TypeScript files are executed directly by Bun without compilation in development
+- The build process copies data files to dist/ and sets executable permissions on the main script
+- JSONL files in data/ directories are automatically scanned and loaded at startup
+- Database schema includes FTS5 virtual tables for full-text search with automatic triggers for synchronization
+
+# important-instruction-reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
 ```
