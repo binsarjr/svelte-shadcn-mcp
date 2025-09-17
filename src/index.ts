@@ -562,8 +562,8 @@ class ShadcnSvelteMCPServer {
                 relevance: item.relevance_score,
               })),
               code_examples: exampleResults?.results?.map(item => ({
-                scenario: item.input,
-                implementation: item.output,
+                scenario: item.title,
+                implementation: item.code,
                 relevance: item.relevance_score,
               })),
             },
