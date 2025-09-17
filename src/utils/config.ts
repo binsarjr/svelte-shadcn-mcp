@@ -25,13 +25,13 @@ function getXdgConfigHome(): string {
 
 /**
  * Get application-specific configuration paths
- * Uses ~/.config/binsarjr/trpc-sveltekit-mcp/ on all platforms for consistency
+ * Uses ~/.config/binsarjr/shadcn-svelte-mcp/ on all platforms for consistency
  * Following XDG Base Directory specification
  */
 export function getConfigPaths(): ConfigPaths {
   // Check for environment variable override
-  const customConfigDir = process.env.TRPC_SVELTEKIT_MCP_CONFIG_DIR;
-  const customDbPath = process.env.TRPC_SVELTEKIT_MCP_DB_PATH;
+  const customConfigDir = process.env.SHADCN_SVELTE_MCP_CONFIG_DIR;
+  const customDbPath = process.env.SHADCN_SVELTE_MCP_DB_PATH;
 
   let configDir: string;
 
@@ -40,7 +40,7 @@ export function getConfigPaths(): ConfigPaths {
   } else {
     // Use XDG config directory with app-specific subdirectory
     const baseConfigDir = getXdgConfigHome();
-    configDir = join(baseConfigDir, 'binsarjr', 'trpc-sveltekit-mcp');
+    configDir = join(baseConfigDir, 'binsarjr', 'shadcn-svelte-mcp');
   }
 
   // Ensure config directory exists
@@ -50,7 +50,7 @@ export function getConfigPaths(): ConfigPaths {
     } catch (error) {
       console.warn(`Warning: Could not create config directory ${configDir}:`, error);
       // Fallback to temp directory if we can't create config dir
-      configDir = join(process.cwd(), '.trpc-sveltekit-mcp-cache');
+      configDir = join(process.cwd(), '.shadcn-svelte-mcp-cache');
       if (!existsSync(configDir)) {
         mkdirSync(configDir, { recursive: true });
       }
@@ -84,15 +84,15 @@ export function getConfigDirectory(): string {
  */
 export function logConfigPaths(): void {
   const paths = getConfigPaths();
-  console.log('tRPC SvelteKit MCP Configuration:');
+  console.log('shadcn-svelte MCP Configuration:');
   console.log(`  Config Directory: ${paths.configDir}`);
   console.log(`  Database Path: ${paths.databasePath}`);
 
-  if (process.env.TRPC_SVELTEKIT_MCP_CONFIG_DIR) {
-    console.log(`  Using custom config dir from TRPC_SVELTEKIT_MCP_CONFIG_DIR`);
+  if (process.env.SHADCN_SVELTE_MCP_CONFIG_DIR) {
+    console.log(`  Using custom config dir from SHADCN_SVELTE_MCP_CONFIG_DIR`);
   }
 
-  if (process.env.TRPC_SVELTEKIT_MCP_DB_PATH) {
-    console.log(`  Using custom database path from TRPC_SVELTEKIT_MCP_DB_PATH`);
+  if (process.env.SHADCN_SVELTE_MCP_DB_PATH) {
+    console.log(`  Using custom database path from SHADCN_SVELTE_MCP_DB_PATH`);
   }
 }

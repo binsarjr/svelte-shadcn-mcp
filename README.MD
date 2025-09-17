@@ -11,15 +11,16 @@ A specialized Model Context Protocol (MCP) server for shadcn-svelte development,
 ### 🛠️ **Intelligent Tools**
 - `search_knowledge` - Find explanations and concepts
 - `search_examples` - Discover code patterns and implementations
-- `generate_with_context` - Create routers and procedures using curated patterns
+- `search_components` - Search UI components with props and variants
+- `generate_component` - Generate components with themes and accessibility
 - `audit_with_rules` - Review code against shadcn-svelte best practices
 - `explain_concept` - Get detailed explanations with examples
 
 ### 📝 **Smart Prompts**
-- `generate-router` - Generate modern shadcn-svelte routers
-- `audit-trpc-code` - Audit code for optimization opportunities
-- `explain-concept` - Detailed concept explanations
-- `search-patterns` - Find specific implementation patterns
+- `generate-component` - Generate modern shadcn-svelte components
+- `audit-shadcn-code` - Audit code for accessibility and design system compliance
+- `explain-concept` - Detailed concept explanations with examples
+- `find-component` - Find specific components with usage patterns
 
 ## Installation
 
@@ -90,7 +91,7 @@ shadcn-svelte-mcp/
 ```json
 {
   "mcpServers": {
-    "trpc-sveltekit": {
+    "shadcn-svelte": {
       "command": "bun",
       "args": ["/path/to/shadcn-svelte-mcp/src/index.ts"],
       "env": {}
@@ -138,7 +139,7 @@ Generates a complete shadcn-svelte component using modern patterns with relevant
 ### 🔍 Audit Code
 ```
 Tool: audit_with_rules
-Code: "const Button = ({ variant = 'default', ...props }) => { ... }"
+Code: "<script>\n  let { variant = 'default', ...props } = $props();\n</script>\n<button class={buttonVariants({ variant })} {...props}><slot /></button>"
 Focus: "accessibility"
 ```
 
