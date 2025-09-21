@@ -274,6 +274,9 @@ export class ShadcnSvelteSearchDB {
     const startTime = performance.now();
     const expandedQuery = this.expandQuery(query);
 
+    // Use OR query for expanded terms to avoid over-restrictive search
+    const orQuery = expandedQuery.split(' ').map(term => `"${term}"`).join(' OR ');
+
     const stmt = this.db.prepare(`
       SELECT k.*,
              snippet(knowledge_fts, 1, '<mark>', '</mark>', '...', 32) as highlighted_answer,
@@ -285,7 +288,7 @@ export class ShadcnSvelteSearchDB {
       LIMIT ?
     `);
 
-    const results = stmt.all(expandedQuery, limit) as (KnowledgeEntry & { highlighted_answer: string })[];
+    const results = stmt.all(orQuery, limit) as (KnowledgeEntry & { highlighted_answer: string })[];
     const endTime = performance.now();
 
     return {
@@ -300,6 +303,9 @@ export class ShadcnSvelteSearchDB {
     const startTime = performance.now();
     const expandedQuery = this.expandQuery(query);
 
+    // Use OR query for expanded terms to avoid over-restrictive search
+    const orQuery = expandedQuery.split(' ').map(term => `"${term}"`).join(' OR ');
+
     const stmt = this.db.prepare(`
       SELECT e.*,
              snippet(examples_fts, 3, '<mark>', '</mark>', '...', 64) as highlighted_code,
@@ -311,7 +317,7 @@ export class ShadcnSvelteSearchDB {
       LIMIT ?
     `);
 
-    const results = stmt.all(expandedQuery, limit) as (ExampleEntry & { highlighted_code: string })[];
+    const results = stmt.all(orQuery, limit) as (ExampleEntry & { highlighted_code: string })[];
     const endTime = performance.now();
 
     return {
@@ -326,6 +332,9 @@ export class ShadcnSvelteSearchDB {
     const startTime = performance.now();
     const expandedQuery = this.expandQuery(query);
 
+    // Use OR query for expanded terms to avoid over-restrictive search
+    const orQuery = expandedQuery.split(' ').map(term => `"${term}"`).join(' OR ');
+
     const stmt = this.db.prepare(`
       SELECT c.*,
              snippet(components_fts, 4, '<mark>', '</mark>', '...', 64) as highlighted_usage,
@@ -337,7 +346,7 @@ export class ShadcnSvelteSearchDB {
       LIMIT ?
     `);
 
-    const results = stmt.all(expandedQuery, limit) as (ComponentEntry & { highlighted_usage: string })[];
+    const results = stmt.all(orQuery, limit) as (ComponentEntry & { highlighted_usage: string })[];
     const endTime = performance.now();
 
     return {
